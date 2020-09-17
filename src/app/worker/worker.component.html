@@ -1,0 +1,53 @@
+<div id="body">
+	<div id="header">
+		<div id="header-row">
+			<h3 id="header-title">gavely</h3>
+		</div>
+	</div>
+	<div id="main">
+		<div id="setup-box">
+			<div id="setup-header">Please fill in the followings below to get you started</div>
+
+			<!-- profile -->
+			<div id="profile" *ngIf="profile.photo"><img id="profile-photo" style="width: {{ profile.width }}px; height: {{ profile.height }}px;" src="{{ profile.photo }}"/></div>
+			<div id="profile" *ngIf="!profile.photo"><img id="profile-photo" src="assets/profile.png"/></div>
+			<!-- end profile -->
+
+			<input id="profile-browse-file" (change)="browsePhoto($event)" type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;"/>
+			<div id="profile-browse" onclick="javascript:document.getElementById('profile-browse-file').click()">Browse(Optional)</div>
+			<div id="profile-header">for easy identifying purpose</div>
+
+			<div class="infos-input">
+				<div class="info-header">Username:</div>
+				<input class="info-input" type="text" maxlength="50" (keyup)="username = $event.target.value" value="{{ username }}"/>
+			</div>
+
+			<div id="knowledge">
+				<h3 id="knowledge-header">Choose your knowledge(s)</h3>
+
+				<div id="knowledge-list">
+					<li class="{{ selected_knowledges.indexOf(knowledge) > -1 ? 'knowledge-item-selected' : 'knowledge-item-unselect' }}" *ngFor="let knowledge of knowledges" (click)="toggleKnowledge(knowledge)">{{ knowledge }}</li>
+				</div>
+
+				<h3 id="knowledge-selected-header">{{ selected_knowledges.length }} knowledge(s) selected</h3>
+			</div>
+
+			<div id="password">
+				<h3 id="password-header">Set your own password</h3>
+
+				<div class="infos-input">
+					<div class="info-header">Your own password:</div>
+					<input class="info-input" type="password" maxlength="50" (keyup)="newpassword = $event.target.value" value="{{ newpassword }}"/>
+				</div>
+				<div class="infos-input">
+					<div class="info-header">Confirm Password:</div>
+					<input class="info-input" type="password" maxlength="50" (keyup)="confirmpassword = $event.target.value" value="{{ confirmpassword }}"/>
+				</div>
+			</div>
+
+			<div id="errormsg">{{ errormsg }}</div>
+
+			<div id="setup-done" (click)="done()">Done</div>
+		</div>
+	</div>
+</div>

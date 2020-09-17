@@ -1,0 +1,854 @@
+@import "~font-awesome/css/font-awesome.min.css"
+
+@font-face
+	font-family: Baloo
+	src: url(../../assets/fonts/BalooThambi2-Regular.ttf)
+
+@font-face
+	font-family: Hyeon
+	src: url(../../assets/fonts/DoHyeon-Regular.ttf)
+
+*
+	font-family: Baloo
+	margin: 0
+	padding: 0
+
+#body
+	background-image: linear-gradient(to bottom right, blue, red)
+	padding-top: 10px
+	height: calc(100vh - 10px)
+
+input
+	font-size: 15px
+	outline: none
+
+/* header */
+#header
+	background-color: rgba(0, 0, 0, 0.6)
+	border-radius: 2px
+	display: flex
+	flex-direction: column
+	height: 70px
+	justify-content: space-around
+	margin-left: 10px
+	width: calc(100vw - 20px)
+
+#header-row
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	padding: 0 10px
+
+#header-title
+	color: white
+	font-family: Hyeon
+	font-size: 30px
+
+#logout
+	border-color: white
+	border-radius: 5px
+	border-style: solid
+	border-width: 2px
+	color: white
+	font-size: 15px
+	height: 22px
+	margin-top: -2px
+	padding: 2px
+	text-align: center
+
+#logout:hover
+	background-color: rgba(0, 0, 0, 0.8)
+	cursor: pointer
+/* end header */
+
+/* main */
+#main
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	margin: 10px
+
+/* sidebar */
+#sidebar
+	background-color: rgba(0, 0, 0, 0.6)
+	border-radius: 2px
+	height: calc(100vh - 100px)
+	width: 200px
+
+#sidebar-items-list
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+
+.sidebar-item
+	background-color: white
+	border-radius: 5px
+	border-style: solid
+	font-size: 20px
+	list-style-type: none
+	margin: 10px
+	padding: 5px
+	text-align: center
+
+.sidebar-item:hover
+	background-color: grey
+	cursor: pointer
+/* end sidebar */
+
+/* workspace */
+#workspace
+	background-color: rgba(0, 0, 0, 0.2)
+	height: calc(100vh - 100px)
+	overflow: hidden
+	width: calc(100vw - 230px)
+
+#workspace-header
+	display: flex
+	flex-direction: row
+	padding: 5px
+
+#search-plan-header
+	color: white
+	font-size: 15px
+	padding: 5px
+
+#search-plan
+	border-radius: 2px
+	border-style: solid
+	height: 20px
+	margin-top: 3px
+	padding: 2px
+
+#plans
+	display: flex
+	flex: 1
+	flex-direction: row
+	margin: 10px 0
+	overflow-x: scroll
+	width: calc(100vw - 230px)
+
+.plan
+	background-color: white
+	border-color: rgba(0, 0, 0, 0.1)
+	border-radius: 5px
+	border-style: solid
+	height: calc(100vh - 170px)
+	margin: 0 10px
+
+.plan-spanner
+	width: 390px
+
+.plan-cancel
+	background-color: rgba(0, 0, 0, 0.1)
+	border-radius: 5px
+	font-size: 13px
+	margin: 2px auto
+	text-align: center
+	width: 100px
+
+.plan-cancel:hover
+	background-color: rgba(0, 0, 0, 0.05)
+	cursor: pointer
+
+.plan-header
+	margin-bottom: 5px
+	text-align: center
+
+.plan-header input
+	border-radius: 3px
+	border-style: solid
+	height: 15px
+	margin-bottom: -5px
+	padding: 2px
+
+.plan-header-save,
+.plan-header-close,
+.header-edit,
+.header-save,
+.header-close
+	border-radius: 5px
+	border-style: solid
+	border-width: 2px
+	margin: 0 10px
+	padding: 2px
+
+.plan-header-save:hover,
+.plan-header-close:hover,
+.header-edit:hover,
+.header-save:hover,
+.header-close:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+.plan-between_date,
+.plan-leftovertime
+	font-size: 13px
+
+.plan-start_date,
+.plan-end_date
+	font-size: 15px
+
+.plan-start_date,
+.plan-between_date,
+.plan-leftovertime,
+.plan-end_date
+	background-color: rgba(0, 0, 0, 0.1)
+	padding: 5px
+	width: 390px
+
+.plan-actions
+	display: flex
+	flex-direction: row
+	justify-content: space-around
+	margin: 0 auto
+
+.plan-action
+	background-color: rgba(0, 0, 0, 0.1)
+	border-radius: 5px
+	margin: 5px auto
+	padding: 5px
+	text-align: center
+	width: 110px
+
+.plan-action:hover
+	background-color: rgba(0, 0, 0, 0.05)
+	cursor: pointer
+
+/* tasks */
+.tasks-list
+	font-size: 13px
+	max-height: calc(100vh - 345px)
+	overflow-y: scroll
+
+.task-item
+	background-color: rgba(127, 127, 127, 0.1)
+	border-radius: 5px
+	margin: 10px
+	padding: 10px
+
+.task-error
+	color: darkred
+	text-align: center
+
+.task-action
+	border-radius: 5px
+	border-style: solid
+	border-width: 2px
+	display: flex
+	flex-direction: column
+	height: 17px
+	justify-content: space-around
+	margin: 0 0 -20px 340px
+	text-align: center
+	width: 17px
+
+.task-action:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+.task-item-index
+	font-weight: bold
+
+.task-item-between_date,
+.task-item-leftovertime
+	font-size: 13px
+
+.task-item-worker,
+.task-item-start_date,
+.task-item-end_date
+	margin: 5px 0
+
+.task-item-job-input
+	border-radius: 3px
+	border-style: solid
+	height: 15px
+	margin-bottom: -5px
+	padding: 2px
+
+.task-item-edit,
+.task-item-save,
+.task-item-close,
+.task-item-autopick
+	border-radius: 5px
+	border-style: solid
+	border-width: 2px
+	margin: 0 2px
+	padding: 2px
+
+.task-item-edit:hover,
+.task-item-save:hover,
+.task-item-close:hover,
+.task-item-autopick:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+.task-knowledge-list
+	border-radius: 3px
+	border-style: solid
+	border-width: 2px
+	font-size: 10px
+	text-align: center
+	width: 20px
+
+.task-knowledge-list:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+/* end tasks */
+/* end workspace */
+/* end main */
+
+/* hidden box */
+#hidden-box
+	background-color: rgba(0, 0, 0, 0.8)
+	display: flex
+	flex-direction: column
+	height: 100vh
+	justify-content: space-around
+	position: absolute
+	top: 0
+	width: 100vw
+
+/* add workers box */
+#addworkers-box
+	background-color: white
+	border-radius: 5px
+	border-style: solid
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+	margin: 0 auto
+	width: 500px
+
+#addworkers-note
+	margin: 20px 0
+	text-align: center
+
+#addworkers-header
+	font-size: 20px
+	font-weight: bold
+	margin: 20px 0
+	text-align: center
+
+#addworkers-limit-header
+	text-align: center
+
+.addworkers-email-input
+	margin: 5px auto
+
+.addworkers-email-input input
+	border-style: solid
+	padding: 2px
+	width: 300px
+
+.addworkers-email-input-delete
+	border-radius: 5px
+	border-style: solid
+	border-width: 2px
+	margin-left: 5px
+	padding: 3px
+
+.addworkers-email-input-delete:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+#addworkers-email-add
+	border-radius: 3px
+	border-style: solid
+	border-width: 2px
+	margin: 10px auto
+	text-align: center
+	width: 80px
+
+#addworkers-email-add:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+#addworkers-sent
+	text-align: center
+
+#addworkers-actions
+	display: flex
+	flex-direction: row
+	justify-content: space-around
+	margin: 20px auto
+	width: 300px
+
+.addworkers-action
+	border-radius: 5px
+	border-style: solid
+	padding: 5px
+	text-align: center
+	width: 100px
+
+.addworkers-action:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+/* end add workers box */
+
+/* remove workers */
+#removeworkers-box
+	background-color: white
+	border-radius: 5px
+	border-style: solid
+	display: flex
+	flex-direction: column
+	height: 500px
+	justify-content: space-between
+	margin: 0 auto
+	width: 500px
+
+#removeworkers-header
+	font-size: 20px
+	font-weight: bold
+	margin: 20px 0
+	text-align: center
+
+#removeworkers-workers-list
+	border-radius: 3px
+	border-style: solid
+	height: 202px
+	margin: 0 auto
+	overflow-y: scroll
+	width: 350px
+
+#removeworkers-no-result
+	margin: 90px 0
+	text-align: center
+
+.removeworkers-worker-item
+	border-radius: 2px
+	border-style: solid
+	border-width: 2px
+	display: flex
+	flex-direction: row
+	margin: 2px
+	padding: 2px
+	text-align: center
+
+.removeworkers-worker-item-profile
+	background-color: rgba(0, 0, 0, 0.3)
+	border-radius: 20px
+	height: 40px
+	width: 40px
+
+.removeworkers-worker-item-profile img
+	height: 40px
+	width: 40px
+
+.removeworkers-worker-item-name
+	margin-top: 7px
+	width: 208px
+
+.removeworkers-worker-remove
+	border-radius: 13px
+	border-style: solid
+	border-width: 2px
+	height: 18px
+	margin: 5px 0 0 50px
+	padding: 1px 0
+	width: 20px
+
+.removeworkers-worker-remove:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+#removeworkers-actions
+	display: flex
+	flex-direction: row
+	justify-content: space-around
+	margin: 20px auto
+	width: 300px
+
+.removeworkers-action
+	border-radius: 5px
+	border-style: solid
+	padding: 5px
+	text-align: center
+	width: 100px
+
+.removeworkers-action:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+/* end remove workers */
+
+/* calendar box */
+.calendar-box
+	background-color: white
+	border-radius: 5px
+	border-style: solid
+	display: flex
+	flex-direction: column
+	height: 550px
+	justify-content: space-between
+	margin: 0 auto
+	width: 500px
+
+.calendar-header
+	font-size: 20px
+	font-weight: bold
+	margin: 20px 0
+	text-align: center
+
+.calendar-table
+	border-radius: 5px
+	border-style: solid
+	height: 315px
+	margin: 0 auto
+	width: 300px
+
+.calendar-table-headers:first-child
+	border-style: solid
+	border-width: 0 0 3px 0
+
+.calendar-table-headers
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	padding: 2px 5px
+
+.calendar-table-prev:hover
+	color: rgba(0, 0, 0, 0.6)
+	cursor: pointer
+
+.calendar-table-header
+	font-size: 15px
+	font-weight: bold
+
+.calendar-table-next:hover
+	color: rgba(0, 0, 0, 0.6)
+	cursor: pointer
+
+.calendar-table-days-header
+	border-style: solid
+	border-width: 2px 0
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+
+.calendar-table-day-header:first-child
+	border-width: 0 1px 0 0
+
+.calendar-table-day-header:last-child
+	border-width: 0 0 0 1px
+
+.calendar-table-day-header
+	border-style: solid
+	border-width: 0 1px
+	padding: 2px 0
+	text-align: center
+	width: 90px
+
+.calendar-table-dates-row
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+
+.calendar-table-date-header,
+.calendar-table-date-header-disabled,
+.calendar-table-date-header-unavailable,
+.calendar-table-date-header-selected
+	border-radius: 2px
+	border-style: solid
+	border-width: 1px
+	display: flex
+	flex-direction: column
+	height: 29.5px
+	justify-content: space-around
+	margin: 3px
+	text-align: center
+	width: 70px
+
+.calendar-table-date-header-unavailable
+	background-color: rgba(0, 0, 0, 0.1)
+
+.calendar-table-date-header-selected
+	background-color: rgba(0, 0, 0, 0.3)
+
+.calendar-table-date-header:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+.calendar-time-box
+	border-radius: 5px
+	border-style: solid
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	margin: 5px auto
+	text-align: center
+	width: 130px
+
+.calendar-time
+	width: 40px
+
+.calendar-time-header
+	font-size: 30px
+	margin: -12px 0
+
+.calendar-time-arrow-down
+	margin-bottom: 15px
+
+[class^="calendar-time-arrow-"]:hover
+	cursor: pointer
+
+.calendar-time-separate
+	font-size: 20px
+	margin: 20px 0
+
+.calendar-actions
+	display: flex
+	flex-direction: row
+	justify-content: space-around
+	margin: 20px auto
+	width: 370px
+
+.calendar-action,
+.calendar-action-disable
+	border-radius: 5px
+	border-style: solid
+	text-align: center
+	width: 100px
+
+.calendar-action-disable
+	opacity: 0.3
+
+.calendar-action:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+/* end calendar box */
+
+/* worker pick box */
+#workerpick-box
+	background-color: white
+	border-radius: 5px
+	border-style: solid
+	display: flex
+	flex-direction: column
+	height: 500px
+	justify-content: space-between
+	margin: 0 auto
+	width: 500px
+
+#workerpick-header
+	font-size: 20px
+	font-weight: bold
+	margin: 20px 0
+	text-align: center
+
+#workerpick-job-header
+	text-align: center
+
+#workerpick-workers-list-header
+	font-weight: bold
+	text-align: center
+
+#workerpick-workers-list
+	border-radius: 3px
+	border-style: solid
+	height: 202px
+	margin: 0 auto
+	overflow-y: scroll
+	width: 350px
+
+.workerpicker-worker-item-unselect,
+.workerpicker-worker-item-selected
+	border-radius: 2px
+	border-style: solid
+	border-width: 2px
+	display: flex
+	flex-direction: row
+	margin: 2px
+	padding: 2px
+	text-align: center
+
+.workerpicker-worker-item-unselect:hover,
+.workerpicker-worker-item-selected:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+.workerpicker-worker-item-selected
+	background-color: rgba(0, 0, 0, 0.4)
+
+.workerpicker-worker-item-profile
+	background-color: rgba(0, 0, 0, 0.3)
+	border-radius: 20px
+	height: 40px
+	width: 40px
+
+.workerpicker-worker-item-profile img
+	height: 40px
+	width: 40px
+
+.workerpicker-worker-item-name
+	margin-top: 7px
+	width: 308px
+
+#workerpick-picked-header
+	text-align: center
+
+#workerpick-actions
+	display: flex
+	flex-direction: row
+	justify-content: space-around
+	margin: 20px auto
+	width: 300px
+
+.workerpick-action
+	border-radius: 5px
+	border-style: solid
+	padding: 5px
+	text-align: center
+	width: 100px
+
+.workerpick-action:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+/* end worker pick box */
+
+/* knowledge box */
+#knowledge-box
+	background-color: white
+	border-radius: 5px
+	border-style: solid
+	display: flex
+	flex-direction: column
+	height: 500px
+	justify-content: space-between
+	margin: 0 auto
+	width: 500px
+
+#knowledge-header
+	font-size: 20px
+	font-weight: bold
+	margin: 20px 0
+	text-align: center
+
+#knowledge-infos
+	margin: 10px auto
+
+.knowledge-info-header
+	width: 400px
+
+#knowledge-list-header
+	font-weight: bold
+	text-align: center
+
+#knowledge-list
+	border-radius: 3px
+	border-style: solid
+	height: 200px
+	margin: 0 auto
+	overflow: hidden
+	width: 350px
+
+[class^="knowledge-list-item-"]
+	border-radius: 2px
+	border-style: solid
+	border-width: 2px
+	float: left
+	list-style-type: none
+	height: 23px
+	margin: 2px
+	padding: 2px
+	text-align: center
+
+.knowledge-list-item-selected
+	background-color: rgba(0, 0, 0, 0.4)
+
+[class^="knowledge-list-item-"]:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+.knowledge-list-item-delete
+	border-radius: 9px
+	border-style: solid
+	border-width: 1px
+	height: 18px
+	text-align: center
+	width: 18px
+
+.knowledge-list-item-delete:hover
+	background-color: rgba(0, 0, 0, 0.5)
+	cursor: pointer
+
+#knowledge-add-input-box
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	margin: 0 auto
+	width: 330px
+	
+#knowledge-add-input
+	border-radius: 3px
+	border-style: solid
+	margin: 2px auto
+	padding: 1px
+	width: 200px
+
+#knowledge-add-input-header
+	color: darkred
+
+#knowledge-add
+	border-radius: 3px
+	border-style: solid
+	border-width: 2px
+	margin: 0 auto
+	text-align: center
+	width: 150px
+
+#knowledge-add:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+#knowledge-actions
+	display: flex
+	flex-direction: row
+	justify-content: space-around
+	margin: 20px auto
+	width: 300px
+
+.knowledge-action
+	border-radius: 5px
+	border-style: solid
+	padding: 5px
+	text-align: center
+	width: 100px
+
+.knowledge-action:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+/* end knowledge box */
+
+/* email body */
+#emailbody
+	background-color: white
+	border-radius: 5px
+	border-style: solid
+	display: flex
+	flex-direction: column
+	height: 300px
+	justify-content: space-between
+	margin: 0 auto
+	width: 400px
+
+#emailbody-header
+	padding: 20px 0
+	text-align: center
+
+#emailbody-plan-infos
+	text-align: center
+
+#emailbody-task-infos
+	background-color: rgba(127, 127, 127, 0.2)
+	border-radius: 5px
+	padding: 10px
+
+#emailbody-join
+	padding: 20px 0
+	text-align: center
+
+#emailbody-join a
+	color: blue
+	text-decoration: none
+/* end email body */
+/* end hidden box */

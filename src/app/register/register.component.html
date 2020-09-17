@@ -1,0 +1,48 @@
+<div id="body">
+	<div id="header">
+		<div id="header-row">
+			<h3 id="header-title">gavely</h3>
+
+			<div id="header-navs">
+				<div class="header-nav" (click)="goToPage('intro')">Intro</div>
+				<div class="header-nav" (click)="goToPage('about')">About Us</div>
+				<div class="header-nav" (click)="goToPage('price')">Pricing</div>
+			</div>
+		</div>
+	</div>
+	<div id="main">
+		<div id="register-box">
+			<div id="register-header">Sign up and start your plans</div>
+
+			<div class="infos-input">
+				<div class="info-header">Username:</div>
+				<input class="info-input" type="text" maxlength="50" (keyup)="username = $event.target.value" value="{{ username }}"/>
+			</div>
+
+			<div class="infos-input">
+				<div class="info-header">E-mail:</div>
+				<input class="info-input" type="text" maxlength="50" (keyup)="email = $event.target.value" value="{{ email }}"/>
+			</div>
+
+			<div class="infos-input">
+				<div class="info-header">Password:</div>
+				<input class="info-input" type="password" maxlength="50" (keyup)="password = $event.target.value" value="{{ password }}"/>
+			</div>
+
+			<div class="infos-input">
+				<div class="info-header">Confirm Password:</div>
+				<input class="info-input" type="password" maxlength="50" (keyup)="confirmpassword = $event.target.value" value="{{ confirmpassword }}"/>
+			</div>
+
+			<div id="errormsg">{{ errormsg }}</div>
+
+			<div id="other-option">Already a member ? Click <a (click)="goToPage('login')">here</a> to sign-in</div>
+
+			<div id="register-button" (click)="register()">Register</div>
+
+			<div id="platform-box">
+				<div id="platform-login" class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+			</div>
+		</div>
+	</div>
+</div>

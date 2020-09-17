@@ -1,0 +1,188 @@
+@font-face
+	font-family: Baloo
+	src: url(../../assets/fonts/BalooThambi2-Regular.ttf)
+
+@font-face
+	font-family: Hyeon
+	src: url(../../assets/fonts/DoHyeon-Regular.ttf)
+
+*
+	font-family: Baloo
+	margin: 0
+	padding: 0
+
+#body
+	background-image: linear-gradient(to bottom right, blue, red)
+	padding-top: 10px
+	height: calc(100vh - 10px)
+
+input
+	font-size: 15px
+	outline: none
+
+/* header */
+#header
+	background-color: rgba(0, 0, 0, 0.6)
+	border-radius: 2px
+	display: flex
+	flex-direction: column
+	height: 70px
+	justify-content: space-around
+	margin-left: 10px
+	width: calc(100vw - 20px)
+
+#header-row
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	padding: 0 10px
+
+#header-title
+	color: white
+	font-family: Hyeon
+	font-size: 30px
+/* end header */
+
+/* main */
+#main
+	height: calc(100vh - 100px)
+	margin: 10px
+
+/* setup */
+#setup-box
+	background-color: rgba(0, 0, 0, 0.2)
+	border-radius: 2px
+	height: calc(100vh - 120px)
+	overflow-y: scroll
+	padding: 10px 0
+	width: calc(100vw - 20px)
+
+#setup-header
+	color: white
+	font-size: 30px
+	padding: 20px 0
+	text-align: center
+
+.infos-input
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	margin: 20px auto
+	width: 420px
+
+.info-header
+	color: white
+	padding-right: 10px
+	text-align: right
+	width: 150px
+
+.info-input
+	border-radius: 3px
+	border-style: solid
+	font-weight: bold
+	margin-top: -3px
+	padding: 2px
+	width: 250px
+
+/* profile */
+#profile
+	background-color: rgba(0, 0, 0, 0.5)
+	border-radius: 75px
+	display: flex
+	flex-direction: column
+	height: 150px
+	justify-content: space-around
+	margin: 0 auto
+	overflow: hidden
+	width: 150px
+
+#profile-photo
+	height: 150px
+	width: 150px
+
+#profile-browse
+	border-color: white
+	border-radius: 5px
+	border-style: solid
+	border-width: 2px
+	color: white
+	margin: 10px auto 0px auto
+	padding: 2px
+	text-align: center
+	width: 130px
+
+#profile-browse:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+
+#profile-header
+	color: white
+	margin-bottom: 50px
+	text-align: center
+/* end profile */
+
+/* knowledge */
+#knowledge
+	margin: 50px auto
+	width: 400px
+
+#knowledge-header
+	color: white
+	text-align: center
+
+[class^="knowledge-item-"]
+	border-radius: 2px
+	border-style: solid
+	border-width: 2px
+	float: left
+	list-style-type: none
+	height: 23px
+	margin: 2px
+	padding: 2px
+	text-align: center
+
+.knowledge-item-unselect
+	background-color: white
+
+.knowledge-item-selected
+	background-color: grey
+	color: white
+
+[class^="knowledge-item-"]:hover
+	background-color: rgba(255, 255, 255, 0.5)
+	cursor: pointer
+
+#knowledge-selected-header
+	color: white
+	font-size: 15px
+	margin-top: 120px
+	text-align: center
+/* end knowledge */
+
+/* password */
+#password
+	margin: 50px auto
+	width: 400px
+
+#password-header
+	color: white
+	text-align: center
+/* end password */
+
+#errormsg
+	color: red
+	font-weight: bold
+	text-align: center
+
+#setup-done
+	border-radius: 5px
+	border-style: solid
+	margin: 0 auto
+	text-align: center
+	width: 50px
+
+#setup-done:hover
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+/* end setup */
+/* end main */

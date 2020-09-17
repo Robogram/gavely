@@ -1,0 +1,290 @@
+<div id="body">
+	<div id="header">
+		<div id="header-row">
+			<h3 id="header-title">gavely</h3>
+			<div id="logout" (click)="goToPage('login')">
+				Sign-Out
+				<div>@{{ username }}</div>
+			</div>
+		</div>
+	</div>
+	<div id="main">
+		<div id="sidebar">
+			<ul id="sidebar-items-list">
+				<li class="sidebar-item" (click)="startPlan()">Start a plan</li>
+				<li class="sidebar-item" (click)="openRemoveWorkers()">Remove worker(s)</li>
+			</ul>
+		</div>
+		<div id="workspace">
+			<div id="workspace-header">
+				<div id="search-plan-header">Search plan:</div>
+				<input id="search-plan" type="text" maxlength="100" (keyup)="searchPlan($event.target.value)"/>
+			</div>
+			<div id="plans">
+				<div class="plan" *ngFor="let plan of plans; index as plan_index;">
+					<div class="plan-spanner"></div>
+					<div class="plan-cancel" (click)="deletePlan(plan.id)">Delete Plan</div>
+
+					<!-- plan: header field -->
+					<div class="plan-header">
+						<div *ngIf="plan.header.edit == false">
+							Plan #{{ plan_index + 1 }}: <strong>{{ plan.header.title }}</strong> <i class="fa fa-pencil header-edit" (click)="plan.header.edit = true"></i>
+						</div>
+						<div *ngIf="plan.header.edit == true">
+							Plan#{{ plan_index + 1}}: <input type="text" maxlength="100" (keyup)="plan.header.newinfo = $event.target.value"/> <i class="fa fa-check plan-header-save" (click)="saveHeader(plan.id, '')"></i> <i class="fa fa-times plan-header-close" (click)="plan.header.edit = false"></i>
+						</div>
+					</div>
+					<!-- plan: end header field -->
+
+					<!-- plan: start date -->
+					<div class="plan-start_date" *ngIf="plan.start_date.type == 'date'">
+						{{ displayDateHeader(plan.start_date) }}: 
+						<strong>{{ displayDate(plan.start_date.current_date) }}</strong>
+						<i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, '', 'start')"></i>
+					</div>
+					<div class="plan-start_date" *ngIf="plan.start_date.type == 'none'">
+						Start: 
+						<strong>Not Set Yet</strong>
+						<i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, '', 'start')"></i>
+					</div>
+					<!-- plan: end start date -->
+
+					<!-- plan: time between dates field -->
+					<div class="plan-between_date" *ngIf="displayBetweenDates(plan) != null">Time between dates: <strong>{{ displayBetweenDates(plan) }}</strong></div>
+					<!-- plan: end time between dates field -->
+
+					<!-- plan: time left over field -->
+					<div class="plan-leftovertime" *ngIf="displayTimeleft(plan) != null">Time leftover: <strong>{{ displayTimeleft(plan) }}</strong></div>
+					<!-- plan: end time left over field -->
+
+					<!-- plan: end date -->
+					<div class="plan-end_date" *ngIf="plan.end_date.type == 'lapse'">It's been: <strong>{{ displayTimelapse(plan) }}</strong> <i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, '', 'end')"></i></div>
+					<div class="plan-end_date" *ngIf="plan.end_date.type == 'none'">End: <strong>Not Set Yet</strong> <i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, '', 'end')"></i></div>
+					<div class="plan-end_date" *ngIf="plan.end_date.type == 'date'">End: <strong>{{ displayDate(plan.end_date.current_date) }}</strong> <i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, '', 'end')"></i></div>
+					<!-- plan: end end date -->
+
+					<div class="plan-actions">
+						<div class="plan-action" (click)="addTask(plan.id)">Add A Task</div>
+						<div class="plan-action" (click)="openAddWorkers(plan.id, 'worker')">Add Worker(s)</div>
+						<div class="plan-action" (click)="openAddWorkers(plan.id, 'manager')">Add Manager(s)</div>
+					</div>
+					
+					<div class="tasks-list">
+						<div class="task-item" *ngFor="let task of plan.tasks; index as task_index;">
+							<div class="task-error" *ngIf="task.errormsg">{{ task.errormsg }}</div>
+
+							<div class="task-action" (click)="removeTask(plan.id, task.id)"><i class="fa fa-times"></i></div>
+							
+							<div class="task-item-index">
+								<div *ngIf="task.job.edit == false">
+									Task #{{ task_index + 1 }}: <strong>{{ task.job.title }}</strong> <i class="fa fa-pencil task-item-edit" (click)="task.job.edit = true"></i>
+								</div>
+								<div *ngIf="task.job.edit == true">
+									Task #{{ task_index + 1 }}: <input class="task-item-job-input" type="text" maxlength="100" (keyup)="task.job.newinfo = $event.target.value"/> <i class="fa fa-check task-item-save" (click)="saveHeader(plan.id, task.id)"></i> <i class="fa fa-times task-item-close" (click)="task.job.edit = false"></i>
+								</div>
+							</div>
+
+							<!-- task: worker field -->
+							<div class="task-item-worker">
+								Worker: <strong>{{ task.worker.title }}</strong>
+								<strong class="task-item-autopick" (click)="autoPickWorker(plan.id, task.id)">auto-pick</strong><strong class="fa fa-address-book task-item-edit" (click)="openWorkerPicker(plan.id, task.id)"></strong>
+							</div>
+							<!-- task: end worker field -->
+
+							<!-- task: start date field -->
+							<div class="task-item-start_date" *ngIf="task.start_date.type == 'date'">
+								{{ displayDateHeader(task.start_date) }}
+								: <strong>{{ displayDate(task.start_date.current_date) }}</strong>
+								<i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, task.id, 'start')"></i>
+							</div>
+							<div class="task-item-start_date" *ngIf="task.start_date.type == 'none'">
+								Start: <strong>Not Set Yet</strong>
+								<i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, task.id, 'start')"></i>
+							</div>
+							<!-- task: end start date field -->
+
+							<!-- task: time between dates field -->
+							<div class="task-item-between_date" *ngIf="displayBetweenDates(task) != null">Time between dates: <strong>{{ displayBetweenDates(task) }}</strong></div>
+							<!-- task: end time between dates field -->
+
+							<!-- task: time left over field -->
+							<div class="task-item-leftovertime" *ngIf="displayTimeleft(task) != null">Time leftover: <strong>{{ displayTimeleft(task) }}</strong></div>
+							<!-- task: end time left over field -->
+
+							<!-- task: end date field -->
+							<div class="task-item-end_date" *ngIf="task.end_date.type == 'lapse'">It's been: <strong>{{ displayTimelapse(task) }}</strong> <i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, task.id, 'end')"></i></div>
+							<div class="task-item-end_date" *ngIf="task.end_date.type == 'none'">End: <strong>Not Set Yet</strong> <i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, task.id, 'end')"></i></div>
+							<div class="task-item-end_date" *ngIf="task.end_date.type == 'date'">End: <strong>{{ displayDate(task.end_date.current_date) }}</strong> <i class="fa fa-pencil header-edit" (click)="openCalendar(plan.id, task.id, 'end')"></i></div>
+							<!-- task: end end date field -->
+
+							<div class="task-knowledge-list" (click)="editKnowledge(plan.id, task.id)"><i class="fa fa-list-ul"></i></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="hidden-box" *ngIf="hidden.show == true">
+		<!-- add workers box -->
+		<div id="addworkers-box" *ngIf="hidden.addworkers">
+			<div id="addworkers-note">Note: {{ hidden.note }}</div>
+			<div id="addworkers-header">Add new {{ hidden.collabtype == 'worker' ? 'worker(s)' : 'manager(s)' }}</div>
+
+			<div id="addworkers-limit-header">5 e-mail(s) at a time</div>
+			<div class="addworkers-email-input" *ngFor="let email of hidden.emails; index as key">Email: <input type="text" maxlength="50" (keyup)="email.newinfo = $event.target.value"/> <i class="fa fa-times addworkers-email-input-delete" (click)="hidden.emails.splice(key, 1)"></i></div>
+			<div id="addworkers-email-add" (click)="hidden.emails.length < 5 ? hidden.emails.push({header: '', newinfo: ''}) : null">+ E-mail</div>
+
+			<div id="addworkers-sent" *ngIf="hidden.sent">Email(s) Sent</div>
+
+			<div id="addworkers-actions">
+				<div class="addworkers-action" (click)="closeAddWorkers()">Cancel</div>
+				<div class="addworkers-action" (click)="sendInvites()">Send Invite{{ hidden.emails.length > 1 ? '(s)' : '' }}</div>
+			</div>
+		</div>
+		<!-- end add workers box -->
+
+		<!-- remove workers box -->
+		<div id="removeworkers-box" *ngIf="hidden.removeworkers">
+			<div id="removeworkers-header">Remove worker(s)</div>
+
+			<div id="removeworkers-workers-list" *ngIf="hidden.workers.length > 0">
+				<div class="removeworkers-worker-item" *ngFor="let value of hidden.workers; index as key;">
+					<strong class="removeworkers-worker-item-profile">
+						<img src="./assets/profile.png"/>
+					</strong>
+					<strong class="removeworkers-worker-item-name">{{ value.name }}</strong>
+					<i class="removeworkers-worker-remove fa fa-times" (click)="removeWorker(key)"></i>
+				</div>
+			</div>
+			<div id="removeworkers-workers-list" *ngIf="hidden.workers.length == 0">
+				<div id="removeworkers-no-result">No worker(s) are added</div>
+			</div>
+
+			<div id="removeworkers-actions">
+				<div class="removeworkers-action" (click)="closeRemoveWorkers()">Cancel</div>
+				<div class="removeworkers-action" (click)="saveRemoveWorkers()">Save</div>
+			</div>
+		</div>
+		<!-- end remove workers box -->
+
+		<!-- calendar box: date selection -->
+		<div class="calendar-box" *ngIf="hidden.date_type != ''">
+			<div class="calendar-header">Select the {{ hidden.date_type }} date</div>
+			<div class="calendar-table">
+				<div class="calendar-table-headers">
+					<i class="fa fa-1x fa-arrow-left calendar-table-prev" (click)="prevYear()"></i>
+					<div class="calendar-table-header">{{ curr_time.year }}</div>
+					<i class="fa fa-1x fa-arrow-right calendar-table-next" (click)="nextYear()"></i>
+				</div>
+				<div class="calendar-table-headers">
+					<i class="fa fa-1x fa-arrow-left calendar-table-prev" (click)="prevMonth()"></i>
+					<div class="calendar-table-header">{{ curr_time.month }}</div>
+					<i class="fa fa-1x fa-arrow-right calendar-table-next" (click)="nextMonth()"></i>
+				</div>
+				<div class="calendar-table-days-header">
+					<div class="calendar-table-day-header">Sun</div>
+					<div class="calendar-table-day-header">Mon</div>
+					<div class="calendar-table-day-header">Tue</div>
+					<div class="calendar-table-day-header">Wed</div>
+					<div class="calendar-table-day-header">Thu</div>
+					<div class="calendar-table-day-header">Fri</div>
+					<div class="calendar-table-day-header">Sat</div>
+				</div>
+				<div class="calendar-table-dates-header">
+					<div class="calendar-table-dates-row" *ngFor="let row of days">
+						<div class="{{
+							day['available'] ?
+								day['selected'] ?
+									'calendar-table-date-header-selected'
+									:
+									day['date'] ? 
+										'calendar-table-date-header'
+										: 
+										'calendar-table-date-header-disabled' 
+								:
+								'calendar-table-date-header-unavailable'
+							}}" *ngFor="let day of row" (click)="day['date'] && day['available'] ? pickDate(day['day'], day['date']) : null">{{ day['date'] }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="calendar-time-box">
+				<div class="calendar-time">
+					<i class="fa fa-1x fa-arrow-up calendar-time-arrow-up" (click)="changeTime('hour', 'up')"></i>
+					<div class="calendar-time-header">{{ curr_time.hour < 10 ? '0' + curr_time.hour : curr_time.hour }}</div>
+					<i class="fa fa-1x fa-arrow-down calendar-time-arrow-down" (click)="changeTime('hour', 'down')"></i>
+				</div>
+				<div class="calendar-time-separate">:</div>
+				<div class="calendar-time">
+					<i class="fa fa-1x fa-arrow-up calendar-time-arrow-up" (click)="changeTime('minute', 'up')"></i>
+					<div class="calendar-time-header">{{ curr_time.minute < 10 ? '0' + curr_time.minute : curr_time.minute }}</div>
+					<i class="fa fa-1x fa-arrow-down calendar-time-arrow-down" (click)="changeTime('minute', 'down')"></i>
+				</div>
+				<div class="calendar-time">
+					<i class="fa fa-1x fa-arrow-up calendar-time-arrow-up" (click)="changeTime('period', 'up')"></i>
+					<div class="calendar-time-header">{{ curr_time.period }}</div>
+					<i class="fa fa-1x fa-arrow-down calendar-time-arrow-down" (click)="changeTime('period', 'down')"></i>
+				</div>
+			</div>
+			<div class="calendar-actions">
+				<div class="calendar-action" (click)="cancelCalendar()">Cancel</div>
+				<div class="calendar-action" *ngIf="hidden.date_type == 'end'" (click)="saveCalendar('lapse')">Unsure</div>
+				<div class="{{ 
+					hidden.enable_save || !hidden.item_hold[hidden.date_type + '_date'].current_time ? 'calendar-action' : 'calendar-action-disable' }}" (click)="hidden.enable_save || !hidden.item_hold[hidden.date_type + '_date'].current_time ? saveCalendar('date') : null">Save
+				</div>
+			</div>
+		</div>
+		<!-- end calendar box: date selection -->
+
+		<!-- worker pick box -->
+		<div id="workerpick-box" *ngIf="hidden.pickworker == true">
+			<div id="workerpick-header">Select a worker most suitable for this job</div>
+
+			<div id="workerpick-job-header">Task: <strong>{{ plans[hidden.plan].tasks[hidden.task].job.title }}</strong></div>
+
+			<div id="workerpick-workers-list-header">{{ hidden.workers.length }} potential worker(s) listed</div>
+			<div id="workerpick-workers-list">
+				<div class="{{ 
+					hidden.selected_worker == worker.name ? 'workerpicker-worker-item-selected' : 'workerpicker-worker-item-unselect' }}" *ngFor="let worker of hidden.workers" (click)="pickWorker(worker.name)">
+					<strong class="workerpicker-worker-item-profile">
+						<img src="./assets/profile.png"/>
+					</strong>
+					<strong class="workerpicker-worker-item-name">{{ worker.name }}</strong>
+				</div>
+			</div>
+			<div id="workerpick-picked-header" *ngIf="hidden.selected_worker != ''">{{ hidden.selected_worker }} is selected</div>
+
+			<div id="workerpick-actions">
+				<div class="workerpick-action" (click)="closeWorker()">Cancel</div>
+				<div class="workerpick-action" (click)="saveWorker()">Save</div>
+			</div>
+		</div>
+		<!-- end worker pick box -->
+
+		<!-- knowledge box -->
+		<div id="knowledge-box" *ngIf="hidden.knowledgereq">
+			<div id="knowledge-header">Select any required knowledge(s) for this task</div>
+
+			<div id="knowledge-infos">
+				<div class="knowledge-info-header">Plan: <strong>{{ plans[hidden.plan].header.title }}</strong></div>
+				<div class="knowledge-info-header">Task: <strong>{{ plans[hidden.plan].tasks[hidden.task].job.title }}</strong></div>
+			</div>
+
+			<div id="knowledge-list-header">Generic Knowledge(s)</div>
+			<ul id="knowledge-list">
+				<li class="{{ hidden.selected_knowledges.indexOf(knowledge) > -1 ? 'knowledge-list-item-selected' : 'knowledge-list-item-unselect' }}" *ngFor="let knowledge of hidden.generic_knowledges" (click)="selectKnowledge(knowledge)">{{ knowledge }}<div class="fa fa-times knowledge-list-item-delete" *ngIf="hidden.selected_knowledges.indexOf(knowledge) == -1" (click)="deleteKnowledge(knowledge)"></div></li>
+			</ul>
+			<div id="knowledge-add-input-box">
+				<input id="knowledge-add-input" type="text" maxlength="50" placeholder="Enter a required knowledge" (keyup)="hidden.newknowledge = $event.target.value; hidden.errormsg = ''"/>
+				<div id="knowledge-add-input-header"><div *ngIf="hidden.errormsg != ''"><i class="fa fa-times knowledge-add-input-errormsg"></i> <strong>{{ hidden.errormsg }}</strong></div></div>
+			</div>
+			<div id="knowledge-add" (click)="addKnowledge()">Add a knowledge</div>
+
+			<div id="knowledge-actions">
+				<div class="knowledge-action" (click)="cancelKnowledge()">Cancel</div>
+				<div class="knowledge-action" (click)="saveKnowledges()">Save</div>
+			</div>
+		</div>
+		<!-- end knowledge box -->
+	</div>
+</div>

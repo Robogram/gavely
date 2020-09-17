@@ -1,0 +1,66 @@
+@import "~font-awesome/css/font-awesome.min.css"
+
+@font-face
+	font-family: Baloo
+	src: url(../../assets/fonts/BalooThambi2-Regular.ttf)
+
+@font-face
+	font-family: Hyeon
+	src: url(../../assets/fonts/DoHyeon-Regular.ttf)
+
+*
+	font-family: Baloo
+	margin: 0
+	padding: 0
+
+/* header */
+#header-title
+	font-family: Hyeon
+	font-size: 30px
+	font-weight: bold
+	padding: 20px 0
+	text-align: center
+
+#header-navs
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	margin: 5px auto
+	width: 300px
+
+.header-nav:hover
+	cursor: pointer
+/* end header */
+
+/* main */
+#main
+	display: flex
+	flex-direction: column
+	height: calc(100vh - 113px)
+	justify-content: space-around
+
+#main-header
+	font-size: 30px
+	text-align: center
+
+#main-row
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	margin: 0 auto
+	width: 800px
+
+.price-box
+	border-radius: 5px
+	border-style: solid
+	height: 300px
+	width: 250px
+
+.price-header
+	background-color: black
+	color: white
+	text-align: center
+
+.price-option-box
+	padding: 10px 30px
+/* end main */

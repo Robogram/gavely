@@ -1,0 +1,38 @@
+<div id="body">
+	<div id="header">
+		<div id="header-row">
+			<h3 id="header-title">gavely</h3>
+
+			<div id="header-navs">
+				<div class="header-nav" (click)="goToPage('intro')">Intro</div>
+				<div class="header-nav" (click)="goToPage('about')">About Us</div>
+				<div class="header-nav" (click)="goToPage('price')">Pricing</div>
+			</div>
+		</div>
+	</div>
+	<div id="main">
+		<div id="login-box">
+			<div id="login-header">Sign in and continue your plans</div>
+
+			<div class="infos-input">
+				<div class="info-header">Username:</div>
+				<input class="info-input" type="text" maxlength="50" (keyup)="username = $event.target.value"/>
+			</div>
+
+			<div class="infos-input">
+				<div class="info-header">Password:</div>
+				<input class="info-input" type="password" maxlength="50" (keyup)="password = $event.target.value"/>
+			</div>
+
+			<div id="errormsg">{{ errormsg }}</div>
+
+			<div id="other-option">Not registered ? Click <a (click)="goToPage('register')">here</a> to sign-up</div>
+
+			<div id="login-button" (click)="login()">Sign-In</div>
+
+			<div id="platform-box">
+				<div id="platform-login" class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+			</div>
+		</div>
+	</div>
+</div>
